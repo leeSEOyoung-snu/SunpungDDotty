@@ -157,8 +157,8 @@ MonoBehaviour:
   gameOverPanel: {fileID: 496233110}
   finalScoreText: {fileID: 1175376183}
   mobParent: {fileID: 1072989539}
-  respawnTimeMin: 1
-  respawnTimeMax: 3
+  spawnTimeMin: 1
+  spawnTimeMax: 5
 --- !u!4 &214341399
 Transform:
   m_ObjectHideFlags: 0

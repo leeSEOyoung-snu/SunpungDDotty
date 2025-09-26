@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ReceivePlayerController : MonoBehaviour
@@ -8,8 +9,27 @@ public class ReceivePlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     
+    private readonly Vector2 initPos = new Vector2(0, -2.5f);
+
+    private void Awake()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        transform.position = initPos;
+        rb.velocity = Vector2.zero;
+    }
+    
     private void Update()
     {
+        if (transform.position.y < -6f)
+        {
+            Respawn();
+            return;
+        }
+        
         bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundedDistance, groundLayer);
         Debug.DrawRay(transform.position, Vector2.down * groundedDistance, Color.red);
         
@@ -30,5 +50,11 @@ public class ReceivePlayerController : MonoBehaviour
     {
         Debug.Log("Jump");
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void Respawn()
+    {
+        transform.position = initPos;
+        rb.velocity = Vector2.zero;
     }
 }
