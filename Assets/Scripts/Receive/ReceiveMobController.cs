@@ -4,13 +4,21 @@ using UnityEngine;
 public class ReceiveMobController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer sp;
     
     private bool _isDead = false;
     private int _collisionCnt = 0;
+    private int _ddottyId;
     
     private const int MaxCollisionCnt = 4;
     private const float RandVelY = 8f, RandVelXRange = 2f;
     private const float InitVelY = 12f, InitVelXMin = 1f, InitVelXMax = 2.5f;
+
+    public void Init(int id)
+    {
+        _ddottyId = id;
+        sp.sprite = Resources.LoadAll<Sprite>("DdottySheet")[_ddottyId];
+    }
 
     private void Start()
     {
