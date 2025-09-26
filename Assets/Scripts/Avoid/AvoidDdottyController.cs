@@ -42,4 +42,13 @@ public class AvoidDdottyController : MonoBehaviour
         
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Cradle"))
+        {
+            AvoidGameManager.Instance.OnDdottyCollision(_ddottyId);
+            Destroy(gameObject);
+        }
+    }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,18 +8,21 @@ public class AvoidGameManager : MonoBehaviour
 {
     public static AvoidGameManager Instance { get; private set; }
 
-    [Header("Programmer")] [SerializeField]
-    private GameObject ddottyPrefab;
-
+    [Header("Programmer")]
+    [SerializeField] private GameObject ddottyPrefab;
     [SerializeField] private Transform[] mommyCannons; // L, R, T
     [SerializeField] private Transform ddottyParent;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI lifeText;
 
-    [Header("Level Designer")] [SerializeField]
-    private float minSpawnDelay;
-
+    [Header("Level Designer")]
+    [SerializeField] private float minSpawnDelay;
     [SerializeField] private float maxSpawnDelay;
+    [SerializeField] private int life;
 
     private readonly float[] _ddottyInitPos = new[] { -8.5f, 8.5f, 5f };
+    
+    private float _elapsedTime = 0f;
 
     private void Awake()
     {
@@ -34,14 +36,28 @@ public class AvoidGameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     private void Init()
     {
+        scoreText.text = "00:00:00";
+        lifeText.text = life.ToString();
+        
         for (int i = 0; i < mommyCannons.Length; i++)
         {
             float spawnDelay = Random.Range(minSpawnDelay, maxSpawnDelay);
             StartCoroutine(SpawnDdotty(i, spawnDelay));
         }
+    }
+
+    private void Update()
+    {
+        _elapsedTime += Time.deltaTime;
+        
+        int hour = (int)(_elapsedTime / 3600f);
+        int min = (int)(_elapsedTime / 60f);
+        int sec = (int)(_elapsedTime % 60f);
+        
+        scoreText.text = $"{hour:D2}:{min:D2}:{sec:D2}";
     }
 
     private IEnumerator SpawnDdotty(int mommyIdx, float time)
@@ -82,5 +98,21 @@ public class AvoidGameManager : MonoBehaviour
             
             yield return new WaitForSeconds(spawnDelay);
         }
+    }
+
+    public void OnDdottyCollision(int id)
+    {
+        life--;
+        lifeText.text = life.ToString();
+        
+        if (life <= 0)
+        {
+            OnEndGame();
+        }
+    }
+
+    private void OnEndGame()
+    {
+        Time.timeScale = 0f;
     }
 }

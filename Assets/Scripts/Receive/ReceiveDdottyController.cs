@@ -38,7 +38,7 @@ public class ReceiveDdottyController : MonoBehaviour
     {
         if (_isDead) return;
         
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Cradle"))
         {
             _collisionCnt++;
             
