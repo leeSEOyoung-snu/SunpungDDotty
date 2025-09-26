@@ -38,7 +38,7 @@ public class ReceiveMobController : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 gameObject.GetComponent<Collider2D>().enabled = false;
                 
-                ReceiveGameManager.Instance.UpdateScore(1);
+                ReceiveGameManager.Instance.UpdateScore();
                 Destroy(gameObject);
             }
             else if (_collisionCnt < MaxCollisionCnt)
@@ -51,6 +51,7 @@ public class ReceiveMobController : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Static;
             gameObject.GetComponent<Collider2D>().enabled = false;
             
+            ReceiveGameManager.Instance.UpdateLife();
             Destroy(gameObject);
         }
     }
