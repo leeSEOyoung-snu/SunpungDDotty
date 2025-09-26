@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4762146355720839581}
   - component: {fileID: 6949024625825667640}
   - component: {fileID: 7704453271454660113}
+  - component: {fileID: 3827164899577265658}
   m_Layer: 9
   m_Name: Cradle
   m_TagString: Player
@@ -214,3 +215,22 @@ PolygonCollider2D:
       - {x: 1.245, y: -0.96999997}
       - {x: 1.235, y: -0.97999996}
   m_UseDelaunayMesh: 0
+--- !u!114 &3827164899577265658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7763615266852358941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f083d00246d765141a11c1fd4e4f742d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  jumpForce: 1000
+  groundedDistance: 0.75
+  rb: {fileID: 6949024625825667640}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
