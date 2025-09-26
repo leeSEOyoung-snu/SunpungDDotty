@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 1008207362}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +351,7 @@ Rigidbody2D:
   m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -361,7 +361,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1008207362
 MonoBehaviour:
@@ -375,9 +375,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f083d00246d765141a11c1fd4e4f742d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 11
+  jumpForce: 600
+  groundedDistance: 0.9
   rb: {fileID: 1008207361}
-  moveSpeed: 50
-  jumpForce: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1249554331
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,9 +394,9 @@ GameObject:
   - component: {fileID: 1249554332}
   - component: {fileID: 1249554334}
   - component: {fileID: 1249554335}
-  m_Layer: 0
-  m_Name: Floor
-  m_TagString: Untagged
+  m_Layer: 8
+  m_Name: Ground
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

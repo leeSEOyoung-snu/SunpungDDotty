@@ -3,16 +3,22 @@ using UnityEngine;
 
 public class ReceivePlayerController : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float groundedDistance;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float moveSpeed, jumpForce;
+    [SerializeField] private LayerMask groundLayer;
     
     private void Update()
     {
+        bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundedDistance, groundLayer);
+        Debug.DrawRay(transform.position, Vector2.down * groundedDistance, Color.red);
+        
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             Move(Vector2.left);
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             Move(Vector2.right);
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) 
+        if (isGrounded && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))) 
             Jump();
     }
 
@@ -23,6 +29,7 @@ public class ReceivePlayerController : MonoBehaviour
 
     private void Jump()
     {
+        Debug.Log("Jump");
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }
