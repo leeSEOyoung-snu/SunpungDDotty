@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ReceivePlayerController : MonoBehaviour
+public class CradleController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
@@ -8,7 +8,7 @@ public class ReceivePlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     
-    private readonly Vector2 initPos = new Vector2(0, -2.5f);
+    private readonly Vector2 _initPos = new Vector2(0, -1f);
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class ReceivePlayerController : MonoBehaviour
 
     private void Init()
     {
-        transform.position = initPos;
+        transform.position = _initPos;
         rb.velocity = Vector2.zero;
     }
     
@@ -47,13 +47,12 @@ public class ReceivePlayerController : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("Jump");
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private void Respawn()
     {
-        transform.position = initPos;
+        transform.position = _initPos;
         rb.velocity = Vector2.zero;
     }
 }

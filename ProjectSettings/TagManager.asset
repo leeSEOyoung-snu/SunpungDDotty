@@ -15,8 +15,8 @@ TagManager:
   - 
   - 
   - Ground
-  - Player
-  - Mob
+  - Cradle
+  - Ddotty
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 1310526565
+    locked: 0
+  - name: Craddle
+    uniqueID: 1869902985
     locked: 0
   - name: DDotty
     uniqueID: 1813425747

@@ -67,7 +67,7 @@ public class ReceiveGameManager : MonoBehaviour
         GameObject newMob = Instantiate(mobPrefab, initPos, Quaternion.identity, mobParent);
         
         int randInt = Random.Range(0, Resources.LoadAll("DdottySheet").Length - 1);
-        newMob.GetComponent<ReceiveMobController>().Init(randInt);
+        newMob.GetComponent<ReceiveDdottyController>().Init(randInt);
     }
 
     private void OnPlayerDeath()

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ReceiveMobController : MonoBehaviour
+public class ReceiveDdottyController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sp;

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4762146355720839581}
   - component: {fileID: 6949024625825667640}
   - component: {fileID: 7704453271454660113}
-  - component: {fileID: 1436672347807660937}
   m_Layer: 9
   m_Name: Cradle
   m_TagString: Player
@@ -73,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1869902985
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5416554ddea35834087cdbe521a6395f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -215,22 +214,3 @@ PolygonCollider2D:
       - {x: 1.245, y: -0.96999997}
       - {x: 1.235, y: -0.97999996}
   m_UseDelaunayMesh: 0
---- !u!114 &1436672347807660937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7763615266852358941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f083d00246d765141a11c1fd4e4f742d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 11
-  jumpForce: 700
-  groundedDistance: 0.75
-  rb: {fileID: 6949024625825667640}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
