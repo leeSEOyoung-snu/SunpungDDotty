@@ -29,18 +29,29 @@ public class ReceiveMobController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _collisionCnt++;
+            
             if (_collisionCnt == MaxCollisionCnt)
             {
+                // 받아내기를 모두 끝냄
                 _isDead = true;
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                rb.velocity = Vector2.zero;
+                gameObject.GetComponent<Collider2D>().enabled = false;
+                
+                ReceiveGameManager.Instance.UpdateScore(1);
+                Destroy(gameObject);
             }
             else if (_collisionCnt < MaxCollisionCnt)
-            {
                 SetRandomVelocity();
-            }
         }
         else if (collision.gameObject.CompareTag("Ground"))
         {
+            // 바닥에 떨어짐
             _isDead = true;
+            rb.bodyType = RigidbodyType2D.Static;
+            gameObject.GetComponent<Collider2D>().enabled = false;
+            
+            Destroy(gameObject);
         }
     }
 }
