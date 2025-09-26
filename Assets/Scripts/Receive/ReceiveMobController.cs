@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ReceiveMobController : MonoBehaviour
@@ -24,12 +25,12 @@ public class ReceiveMobController : MonoBehaviour
         float velX = UnityEngine.Random.Range(-1f * RandVelXRange, RandVelXRange);
         rb.velocity = new Vector2(velX, RandVelY);
     }
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (_isDead) return;
         
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             _collisionCnt++;
             
@@ -47,7 +48,7 @@ public class ReceiveMobController : MonoBehaviour
             else if (_collisionCnt < MaxCollisionCnt)
                 SetRandomVelocity();
         }
-        else if (collision.gameObject.CompareTag("Ground"))
+        else if (other.gameObject.CompareTag("Ground"))
         {
             // 바닥에 떨어짐
             _isDead = true;

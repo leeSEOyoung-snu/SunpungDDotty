@@ -1,19 +1,26 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class ReceiveGameManager : MonoBehaviour
 {
     public static ReceiveGameManager Instance { get; private set; }
-    
+
+    [Header("Programmer")]
     [SerializeField] private GameObject mobPrefab;
     [SerializeField] private TextMeshProUGUI scoreText, lifeText;
-    [SerializeField] private float minRespawnTime, maxRespawnTime;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private Transform mobParent;
+
+    [Header("Level Design")]
+    [SerializeField] private float spawnTimeMin;
+    [SerializeField] private float spawnTimeMax;
     
     private int _score = 0;
     private int _life = 3;
+    
+    private bool _isGameOver = false;
     
     private readonly Vector2 MobInitPos = new Vector2(8f, -4f);
 
@@ -34,6 +41,8 @@ public class ReceiveGameManager : MonoBehaviour
     {
         scoreText.text = _score.ToString();
         lifeText.text = _life.ToString();
+        
+        ReserveSpawn();
     }
 
     public void UpdateScore(int delta = 1)
@@ -60,7 +69,16 @@ public class ReceiveGameManager : MonoBehaviour
 
     private void OnPlayerDeath()
     {
-        finalScoreText.text = "Score: " + _score.ToString();
+        _isGameOver = true;
+        finalScoreText.text = "Score: " + _score;
         gameOverPanel.SetActive(true);
+    }
+
+    private void ReserveSpawn()
+    {
+        if (_isGameOver) return;
+        SpawnMob();
+        float reserveTime = Random.Range(spawnTimeMin, spawnTimeMax);
+        Invoke(nameof(ReserveSpawn), reserveTime);
     }
 }
