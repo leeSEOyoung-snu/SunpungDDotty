@@ -45,3 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Foreground
+    uniqueID: 1310526565
+    locked: 0
+  - name: DDotty
+    uniqueID: 1813425747
+    locked: 0
+  - name: Mommy
+    uniqueID: 3061849009
+    locked: 0
