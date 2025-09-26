@@ -37,7 +37,6 @@ public class AvoidDdottyController : MonoBehaviour
         {
             transform.Translate(_direction * MoveSpeed * Time.deltaTime);
             distance += MoveSpeed * Time.deltaTime;
-            Debug.Log(distance);
             yield return null;
         }
         

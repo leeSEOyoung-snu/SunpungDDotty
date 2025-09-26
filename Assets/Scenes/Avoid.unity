@@ -679,6 +679,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ddottyPrefab: {fileID: 2267422548300642987, guid: 0c094a6005517b54f89fe66328607ec4, type: 3}
+  mommyCannons:
+  - {fileID: 1942847335}
+  - {fileID: 781978908}
+  - {fileID: 535404290}
+  ddottyParent: {fileID: 1212437299}
+  minSpawnDelay: 1
+  maxSpawnDelay: 5
 --- !u!4 &1942847335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3129239175632889150, guid: ecbc8fcc81f75a044b6c01148e5e4e74, type: 3}
