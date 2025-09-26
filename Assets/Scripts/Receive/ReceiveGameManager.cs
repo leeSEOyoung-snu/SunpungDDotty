@@ -10,9 +10,12 @@ public class ReceiveGameManager : MonoBehaviour
     [SerializeField] private float minRespawnTime, maxRespawnTime;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI finalScoreText;
+    [SerializeField] private Transform mobParent;
     
     private int _score = 0;
     private int _life = 3;
+    
+    private readonly Vector2 MobInitPos = new Vector2(8f, -4f);
 
     private void Awake()
     {
@@ -50,7 +53,9 @@ public class ReceiveGameManager : MonoBehaviour
 
     public void SpawnMob()
     {
-        Instantiate(mobPrefab);
+        int sign = Random.Range(0, 2) * 2 - 1;
+        Vector2 initPos = new Vector2(MobInitPos.x * sign, MobInitPos.y);
+        Instantiate(mobPrefab, initPos, Quaternion.identity, mobParent);
     }
 
     private void OnPlayerDeath()

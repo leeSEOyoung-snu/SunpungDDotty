@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ReceiveMobController : MonoBehaviour
@@ -9,17 +8,21 @@ public class ReceiveMobController : MonoBehaviour
     private int _collisionCnt = 0;
     
     private const int MaxCollisionCnt = 4;
-    private const float DefaultVelocityY = 8f, VelocityXRange = 2f;
+    private const float RandVelY = 8f, RandVelXRange = 2f;
+    private const float InitVelY = 12f, InitVelXMin = 1f, InitVelXMax = 2.5f;
 
-    private void Awake()
+    private void Start()
     {
-        SetRandomVelocity();
+        float velX = UnityEngine.Random.Range(InitVelXMin, InitVelXMax);
+        velX *= gameObject.transform.position.x > 0f ? -1f : 1f;
+        Vector2 initVel = new Vector2(velX, InitVelY);
+        rb.velocity = initVel;
     }
 
     private void SetRandomVelocity()
     {
-        float velX = UnityEngine.Random.Range(-1f * VelocityXRange, VelocityXRange);
-        rb.velocity = new Vector2(velX, DefaultVelocityY);
+        float velX = UnityEngine.Random.Range(-1f * RandVelXRange, RandVelXRange);
+        rb.velocity = new Vector2(velX, RandVelY);
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
