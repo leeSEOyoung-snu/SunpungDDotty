@@ -72,6 +72,8 @@ public class ReceiveGameManager : MonoBehaviour
 
     private void OnPlayerDeath()
     {
+        Time.timeScale = 0f;
+        
         _isGameOver = true;
         finalScoreText.text = "Score: " + _score;
         gameOverPanel.SetActive(true);

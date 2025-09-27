@@ -14,6 +14,8 @@ public class AvoidGameManager : MonoBehaviour
     [SerializeField] private Transform ddottyParent;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI lifeText;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TextMeshProUGUI finalScoreText;
 
     [Header("Level Designer")]
     [SerializeField] private float minSpawnDelay;
@@ -23,6 +25,7 @@ public class AvoidGameManager : MonoBehaviour
     private readonly float[] _ddottyInitPos = new[] { -8.5f, 8.5f, 5f };
     
     private float _elapsedTime = 0f;
+    private bool _isGameOver = false;
 
     private void Awake()
     {
@@ -107,12 +110,21 @@ public class AvoidGameManager : MonoBehaviour
         
         if (life <= 0)
         {
-            OnEndGame();
+            OnPlayerDeath();
         }
     }
 
-    private void OnEndGame()
+    private void OnPlayerDeath()
     {
         Time.timeScale = 0f;
+
+        _isGameOver = true;
+        
+        int hour = (int)(_elapsedTime / 3600f);
+        int min = (int)(_elapsedTime / 60f);
+        int sec = (int)(_elapsedTime % 60f);
+        
+        finalScoreText.text = $"Score [{hour:D2}:{min:D2}:{sec:D2}]";
+        gameOverPanel.SetActive(true);
     }
 }
