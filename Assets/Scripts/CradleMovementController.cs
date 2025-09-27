@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CradleController : MonoBehaviour
+public class CradleMovementController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
