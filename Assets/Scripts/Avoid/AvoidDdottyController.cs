@@ -47,7 +47,7 @@ public class AvoidDdottyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Cradle"))
         {
-            AvoidGameManager.Instance.OnDdottyCollision(_ddottyId);
+            AvoidMainManager.Instance.UpdateLife(-1);
             Destroy(gameObject);
         }
     }

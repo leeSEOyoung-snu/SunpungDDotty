@@ -4,18 +4,12 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class AvoidGameManager : MonoBehaviour
+public class AvoidMainManager : MainManagerBase
 {
-    public static AvoidGameManager Instance { get; private set; }
-
     [Header("Programmer")]
     [SerializeField] private GameObject ddottyPrefab;
     [SerializeField] private Transform[] mommyCannons; // L, R, T
     [SerializeField] private Transform ddottyParent;
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI lifeText;
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private TextMeshProUGUI finalScoreText;
 
     [Header("Level Designer")]
     [SerializeField] private float minSpawnDelay;
@@ -25,43 +19,26 @@ public class AvoidGameManager : MonoBehaviour
     private readonly float[] _ddottyInitPos = new[] { -8.5f, 8.5f, 5f };
     
     private float _elapsedTime = 0f;
-    private bool _isGameOver = false;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            Init();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     
-    private void Init()
+    protected override void Init()
     {
-        scoreText.text = "00:00:00";
-        lifeText.text = life.ToString();
-        
         for (int i = 0; i < mommyCannons.Length; i++)
         {
             float spawnDelay = Random.Range(minSpawnDelay, maxSpawnDelay);
             StartCoroutine(SpawnDdotty(i, spawnDelay));
         }
+        
+        base.Init();
     }
 
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
         
-        int hour = (int)(_elapsedTime / 3600f);
-        int min = (int)(_elapsedTime / 60f);
-        int sec = (int)(_elapsedTime % 60f);
-        
-        scoreText.text = $"{hour:D2}:{min:D2}:{sec:D2}";
+        base.UpdateScore();
     }
+
+    public override void UpdateScore(int delta) { }
 
     private IEnumerator SpawnDdotty(int mommyIdx, float time)
     {
@@ -103,28 +80,35 @@ public class AvoidGameManager : MonoBehaviour
         }
     }
 
-    public void OnDdottyCollision(int id)
+    public override void UpdateLife(int delta)
     {
-        life--;
-        lifeText.text = life.ToString();
+        life += delta;
+        base.UpdateLife();
         
         if (life <= 0)
-        {
-            OnPlayerDeath();
-        }
+            base.OnPlayerDeath();
     }
 
-    private void OnPlayerDeath()
+    public override string GetFinalScore()
     {
-        Time.timeScale = 0f;
-
-        _isGameOver = true;
-        
         int hour = (int)(_elapsedTime / 3600f);
         int min = (int)(_elapsedTime / 60f);
         int sec = (int)(_elapsedTime % 60f);
         
-        finalScoreText.text = $"Score [{hour:D2}:{min:D2}:{sec:D2}]";
-        gameOverPanel.SetActive(true);
+        return $"Score [{hour:D2}:{min:D2}:{sec:D2}]";
+    }
+
+    public override string GetCurrScore()
+    {
+        int hour = (int)(_elapsedTime / 3600f);
+        int min = (int)(_elapsedTime / 60f);
+        int sec = (int)(_elapsedTime % 60f);
+        
+        return $"Score [{hour:D2}:{min:D2}:{sec:D2}]";
+    }
+
+    public override string GetCurrLife()
+    {
+        return "Life: " + life;
     }
 }

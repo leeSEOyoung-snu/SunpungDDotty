@@ -50,7 +50,7 @@ public class ReceiveDdottyController : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 gameObject.GetComponent<Collider2D>().enabled = false;
                 
-                ReceiveGameManager.Instance.UpdateScore();
+                ReceiveMainManager.Instance.UpdateScore(1);
                 Destroy(gameObject);
             }
             else if (_collisionCnt < MaxCollisionCnt)
@@ -63,7 +63,7 @@ public class ReceiveDdottyController : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Static;
             gameObject.GetComponent<Collider2D>().enabled = false;
             
-            ReceiveGameManager.Instance.UpdateLife();
+            ReceiveMainManager.Instance.UpdateLife(-1);
             Destroy(gameObject);
         }
     }
