@@ -784,7 +784,7 @@ MonoBehaviour:
   ddottyInfo:
   - id: 0
     scale: 0.5
-    moveSpeed: 20
+    moveSpeed: 15
     direction: {x: 0, y: 0}
   - id: 1
     scale: 0.8
@@ -806,7 +806,7 @@ MonoBehaviour:
     scale: 2
     moveSpeed: 5
     direction: {x: 0, y: 0}
-  minSpawnDelay: 1
+  minSpawnDelay: 2
   maxSpawnDelay: 5
   life: 3
 --- !u!4 &1942847335 stripped
