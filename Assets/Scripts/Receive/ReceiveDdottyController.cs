@@ -1,23 +1,41 @@
 using System;
 using UnityEngine;
 
-public class ReceiveDdottyController : MonoBehaviour
+[Serializable]
+public class ReceiveDdotty : Ddotty
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private SpriteRenderer sp;
-    
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float mass;
+    public float RandVelY => jumpForce;
+    public float Mass => mass;
+}
+
+public class ReceiveDdottyController : DdottyControllerBase
+{
     private bool _isDead = false;
     private int _collisionCnt = 0;
-    private int _ddottyId;
+    
+    private float _randVelY;
     
     private const int MaxCollisionCnt = 4;
-    private const float RandVelY = 8f, RandVelXRange = 2f;
+    private const float RandVelXRange = 2f;
     private const float InitVelY = 12f, InitVelXMin = 1f, InitVelXMax = 2.5f;
 
-    public void Init(int id)
+    public override void Init(Ddotty dottyInfo)
     {
-        _ddottyId = id;
-        sp.sprite = Resources.LoadAll<Sprite>("DdottySheet")[_ddottyId];
+        base.Init(dottyInfo);
+
+        try
+        {
+            ReceiveDdotty receiveDdotty = dottyInfo as ReceiveDdotty;
+            Rb.mass = receiveDdotty.Mass;
+            _randVelY = receiveDdotty.RandVelY;
+        }
+        catch (NullReferenceException e)
+        { 
+            Debug.LogError($"Receive Ddotty Type Casting Error [{e.Message}]");
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -25,13 +43,13 @@ public class ReceiveDdottyController : MonoBehaviour
         float velX = UnityEngine.Random.Range(InitVelXMin, InitVelXMax);
         velX *= gameObject.transform.position.x > 0f ? -1f : 1f;
         Vector2 initVel = new Vector2(velX, InitVelY);
-        rb.velocity = initVel;
+        Rb.velocity = initVel;
     }
 
     private void SetRandomVelocity()
     {
         float velX = UnityEngine.Random.Range(-1f * RandVelXRange, RandVelXRange);
-        rb.velocity = new Vector2(velX, RandVelY);
+        Rb.velocity = new Vector2(velX, _randVelY);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -46,8 +64,8 @@ public class ReceiveDdottyController : MonoBehaviour
             {
                 // 받아내기를 모두 끝냄
                 _isDead = true;
-                rb.bodyType = RigidbodyType2D.Kinematic;
-                rb.velocity = Vector2.zero;
+                Rb.bodyType = RigidbodyType2D.Kinematic;
+                Rb.velocity = Vector2.zero;
                 gameObject.GetComponent<Collider2D>().enabled = false;
                 
                 ReceiveMainManager.Instance.UpdateScore(1);
@@ -60,7 +78,7 @@ public class ReceiveDdottyController : MonoBehaviour
         {
             // 바닥에 떨어짐
             _isDead = true;
-            rb.bodyType = RigidbodyType2D.Static;
+            Rb.bodyType = RigidbodyType2D.Static;
             gameObject.GetComponent<Collider2D>().enabled = false;
             
             ReceiveMainManager.Instance.UpdateLife(-1);

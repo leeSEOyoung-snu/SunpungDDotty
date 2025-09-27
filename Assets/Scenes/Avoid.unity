@@ -775,16 +775,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd75002565054e40add1c416a5c2b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ddottyPrefab: {fileID: 2267422548300642987, guid: 0c094a6005517b54f89fe66328607ec4, type: 3}
+  ddottyPrefab: {fileID: 5769513199865084137, guid: 7de3c0b2a9f5dc046aa3a7912d3bf1ba, type: 3}
   mommyCannons:
   - {fileID: 1942847335}
   - {fileID: 781978908}
   - {fileID: 535404290}
   ddottyParent: {fileID: 1212437299}
-  scoreText: {fileID: 0}
-  lifeText: {fileID: 0}
-  gameOverPanel: {fileID: 0}
-  finalScoreText: {fileID: 0}
+  ddottyInfo:
+  - id: 0
+    scale: 0.5
+    moveSpeed: 20
+    direction: {x: 0, y: 0}
+  - id: 1
+    scale: 0.8
+    moveSpeed: 15
+    direction: {x: 0, y: 0}
+  - id: 2
+    scale: 1
+    moveSpeed: 12
+    direction: {x: 0, y: 0}
+  - id: 3
+    scale: 1.2
+    moveSpeed: 10
+    direction: {x: 0, y: 0}
+  - id: 4
+    scale: 1.5
+    moveSpeed: 8
+    direction: {x: 0, y: 0}
+  - id: 5
+    scale: 2
+    moveSpeed: 5
+    direction: {x: 0, y: 0}
   minSpawnDelay: 1
   maxSpawnDelay: 5
   life: 3

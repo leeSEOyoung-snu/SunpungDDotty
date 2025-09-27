@@ -1,31 +1,41 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AvoidDdottyController : MonoBehaviour
+[Serializable]
+public class AvoidDdotty : Ddotty
+{
+    [SerializeField] private float moveSpeed;
+
+    [HideInInspector] public Vector2 direction;
+    
+    public float MoveSpeed => moveSpeed;
+}
+
+public class AvoidDdottyController : DdottyControllerBase
 {
     private Vector2 _direction;
-    private int _ddottyId;
-    
-    private Rigidbody2D _rb;
-    private SpriteRenderer _sr;
+    private float _moveSpeed;
 
     private const float DestroyDistance = 20f;
-    private const float MoveSpeed = 3f;
 
-    private void Awake()
+    public override void Init(Ddotty dottyInfo)
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _sr = GetComponent<SpriteRenderer>();
-    }
+        base.Init(dottyInfo);
 
-    public void Init(int id, Vector2 dir)
-    {
-        _ddottyId = id;
-        _sr.sprite = Resources.LoadAll<Sprite>("DdottySheet")[id];
-        
-        _direction = dir;
+        try
+        {
+            AvoidDdotty receiveDdotty = dottyInfo as AvoidDdotty;
+            _moveSpeed = receiveDdotty.MoveSpeed;
+            _direction = receiveDdotty.direction;
+        }
+        catch (NullReferenceException e)
+        { 
+            Debug.LogError($"Avoid Ddotty Type Casting Error [{e.Message}]");
+            Destroy(gameObject);
+        }
+
+        Rb.bodyType = RigidbodyType2D.Kinematic;
         StartCoroutine(MoveCoroutine());
     }
 
@@ -35,8 +45,8 @@ public class AvoidDdottyController : MonoBehaviour
 
         while (distance < DestroyDistance)
         {
-            transform.Translate(_direction * MoveSpeed * Time.deltaTime);
-            distance += MoveSpeed * Time.deltaTime;
+            transform.Translate(_direction * _moveSpeed * Time.deltaTime);
+            distance += _moveSpeed * Time.deltaTime;
             yield return null;
         }
         

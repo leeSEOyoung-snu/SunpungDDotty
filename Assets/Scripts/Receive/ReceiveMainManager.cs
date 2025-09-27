@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -11,6 +12,7 @@ public class ReceiveMainManager : MainManagerBase
     [SerializeField] private Transform ddottyParent;
 
     [Header("Level Design")]
+    [SerializeField] private List<ReceiveDdotty> ddottyInfo;
     [SerializeField] private float spawnTimeMin;
     [SerializeField] private float spawnTimeMax;
     
@@ -47,8 +49,8 @@ public class ReceiveMainManager : MainManagerBase
         Vector2 initPos = new Vector2(_ddottyInitPos.x * sign, _ddottyInitPos.y);
         GameObject newMob = Instantiate(ddottyPrefab, initPos, Quaternion.identity, ddottyParent);
         
-        int randInt = Random.Range(0, Resources.LoadAll("DdottySheet").Length - 1);
-        newMob.GetComponent<ReceiveDdottyController>().Init(randInt);
+        int randInt = Random.Range(0, ddottyInfo.Count);
+        newMob.AddComponent<ReceiveDdottyController>().Init(ddottyInfo[randInt]);
     }
 
     private void ReserveSpawn()

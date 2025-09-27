@@ -151,8 +151,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d776a0f1a523bf40bcb66eb8b8f6e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ddottyPrefab: {fileID: 8657470201949499286, guid: 12ec7434eda45c74b807447946af2baa, type: 3}
+  ddottyPrefab: {fileID: 5769513199865084137, guid: 7de3c0b2a9f5dc046aa3a7912d3bf1ba, type: 3}
   ddottyParent: {fileID: 1072989539}
+  ddottyInfo:
+  - id: 0
+    scale: 0.5
+    jumpForce: 3
+    mass: 5
+  - id: 1
+    scale: 0.8
+    jumpForce: 5
+    mass: 8
+  - id: 2
+    scale: 1
+    jumpForce: 8
+    mass: 10
+  - id: 3
+    scale: 1.2
+    jumpForce: 10
+    mass: 12
+  - id: 4
+    scale: 1.5
+    jumpForce: 12
+    mass: 15
+  - id: 5
+    scale: 2
+    jumpForce: 15
+    mass: 20
   spawnTimeMin: 1
   spawnTimeMax: 5
 --- !u!4 &214341399
@@ -735,7 +760,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2392085679932128987, guid: ebd26e5643b751b46b2f1f409517045b, type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 347705328}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd26e5643b751b46b2f1f409517045b, type: 3}

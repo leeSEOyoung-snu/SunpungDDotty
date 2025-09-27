@@ -4,12 +4,9 @@ using UnityEngine;
 [Serializable]
 public class Ddotty
 {
-	public int id;
-	public Sprite sprite;
-	public float scale;
+	[SerializeField] private int id;
+	[SerializeField] private float scale;
 
-	public Ddotty()
-	{
-		sprite = Resources.LoadAll<Sprite>("DdottySheet")[id];
-	}
+	public int Id => id;
+	public float Scale => scale;
 }

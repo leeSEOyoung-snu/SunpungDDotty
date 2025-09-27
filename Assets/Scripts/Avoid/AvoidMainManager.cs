@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,6 +13,7 @@ public class AvoidMainManager : MainManagerBase
     [SerializeField] private Transform ddottyParent;
 
     [Header("Level Designer")]
+    [SerializeField] private List<AvoidDdotty> ddottyInfo;
     [SerializeField] private float minSpawnDelay;
     [SerializeField] private float maxSpawnDelay;
     [SerializeField] private int life;
@@ -72,7 +74,8 @@ public class AvoidMainManager : MainManagerBase
             int ddottyId = Random.Range(0, Resources.LoadAll<Sprite>("DdottySheet").Length - 1);
 
             GameObject newDdotty = Instantiate(ddottyPrefab, ddottyInitPos, Quaternion.identity, ddottyParent);
-            newDdotty.GetComponent<AvoidDdottyController>().Init(ddottyId, direction);
+            ddottyInfo[ddottyId].direction = direction;
+            newDdotty.AddComponent<AvoidDdottyController>().Init(ddottyInfo[ddottyId]);
 
             float spawnDelay = Random.Range(minSpawnDelay, maxSpawnDelay);
             
