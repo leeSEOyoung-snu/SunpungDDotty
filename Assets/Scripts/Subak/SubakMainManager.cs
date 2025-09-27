@@ -1,10 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SubakMainManager : MainManagerBase
 {
+    private SubakCradleMovementController _cradle;
     private int _score = 0;
+
+    protected override void Init()
+    {
+        _cradle = FindObjectOfType<SubakCradleMovementController>();
+        
+        base.Init();
+    }
+
+    private void Update()
+    {
+        throw new NotImplementedException();
+    }
 
     protected override void Init()
     {
